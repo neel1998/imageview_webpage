@@ -20,7 +20,6 @@ const deActivateItems = () => {
 //create img element for the preview
 const createPreviewImage = (url) => {
   let imgElement = document.createElement("img")
-  imgElement.classList.add("preview")
   imgElement.src = url
   return imgElement
 }
@@ -52,7 +51,6 @@ const createListItem = (data, idx) => {
 
   //thumbnail image
   let imgElement = document.createElement("img")
-  imgElement.classList.add("listImage")
   imgElement.src = imgURL
 
   //image title
@@ -74,16 +72,10 @@ const createListItem = (data, idx) => {
 window.addEventListener("keydown", (event) => {
   const key = event.key
   if (key === "ArrowUp") {
-    curIdx -= 1
-    if (curIdx < 0) { //go to the bottom of the list
-      curIdx = data.length - 1
-    }
+    curIdx = (curIdx - 1 + data.length)%data.length
     itemSelected(curIdx)
-  } else if (key === "ArrowDown") { // go to the top of the list
-    curIdx += 1
-    if (curIdx > data.length-1) {
-      curIdx = 0
-    }
+  } else if (key === "ArrowDown") {
+    curIdx = (curIdx + 1)%data.length
     itemSelected(curIdx)
   }
 })
