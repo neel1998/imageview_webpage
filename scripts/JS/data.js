@@ -1,4 +1,4 @@
-var data = [
+const data = [
     {
         "previewImage": "https://images.unsplash.com/photo-1561948955-570b270e7c36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
         "title": "cat.jpeg"
@@ -20,3 +20,5 @@ var data = [
         "title": "interns-performance-report-june-2021.key"
     }
 ]
+
+export default data;

@@ -1,3 +1,6 @@
+import data from "./data.js"
+
+
 var mainListView = document.querySelector(".mainListView")
 var mainPreview = document.querySelector(".mainPreview")
 var curIdx = -1;
