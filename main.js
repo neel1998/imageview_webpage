@@ -46,13 +46,16 @@ const createListItem = (data, idx) => {
   let title = data["title"]
   let imgURL = data["previewImage"]
 
+  //main list div
   let listItem = document.createElement('div')
   listItem.classList.add("listitem")
 
+  //thumbnail image
   let imgElement = document.createElement("img")
   imgElement.classList.add("listImage")
   imgElement.src = imgURL
 
+  //image title
   let titleElement = document.createElement("p")
   titleElement.classList.add("listTitle")
   titleElement.innerHTML = title
@@ -60,6 +63,7 @@ const createListItem = (data, idx) => {
   listItem.appendChild(imgElement)
   listItem.appendChild(titleElement)
 
+  //click listener
   listItem.addEventListener("click", () => {
     itemSelected(idx)
   })
@@ -71,11 +75,11 @@ window.addEventListener("keydown", (event) => {
   const key = event.key
   if (key === "ArrowUp") {
     curIdx -= 1
-    if (curIdx < 0) {
+    if (curIdx < 0) { //go to the bottom of the list
       curIdx = data.length - 1
     }
     itemSelected(curIdx)
-  } else if (key === "ArrowDown") {
+  } else if (key === "ArrowDown") { // go to the top of the list
     curIdx += 1
     if (curIdx > data.length-1) {
       curIdx = 0
