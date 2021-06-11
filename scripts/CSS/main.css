@@ -70,5 +70,6 @@ body {
 }
 
 .listTitle {
+  display: flex;
   white-space: nowrap;
 }

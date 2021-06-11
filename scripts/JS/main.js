@@ -30,7 +30,7 @@ const createPreviewImage = (url) => {
 //create caption element for the previewImage
 const createCaption = (title) => {
   let captionElement = document.createElement("p")
-  captionElement.innerHTML = title
+  captionElement.textContent = title
   return captionElement
 }
 
@@ -60,7 +60,7 @@ const createListItem = (data, idx) => {
   let titleElement = document.createElement("p")
   titleElement.classList.add("listTitle")
   titleElement.setAttribute("data", title)
-  titleElement.innerHTML = title
+  titleElement.textContent = title
 
   listItem.appendChild(imgElement)
   listItem.appendChild(titleElement)
@@ -92,22 +92,20 @@ const checkWidth = () => {
   document.querySelectorAll(".listTitle").forEach((item) => {
       const orig_caption = item.getAttribute("data")
       const orig_length = orig_caption.length
+      item.textContent = orig_caption
       let middleOffset = 1
-      if (item.clientWidth >= item.scrollWidth) {
-        item.innerHTML = orig_caption
-      } else {
-        while (item.clientWidth < item.scrollWidth) {
-            let half = Math.round(orig_length/2)
-            let split = (half < middleOffset)? 1 : half - middleOffset
-            let left = orig_caption.slice(0,split)
+      while (item.clientWidth < item.scrollWidth) {
+          let half = Math.round(orig_length/2)
+          let split = (half < middleOffset)? 1 : half - middleOffset
+          let left = orig_caption.slice(0,split)
 
-            split = (half + middleOffset > orig_length)? (orig_length - 1) : (half + middleOffset)
-            let right = orig_caption.slice(split)
-            item.innerHTML = left + "..." + right
-            middleOffset++
-        }
-    }
+          split = (half + middleOffset > orig_length)? (orig_length - 1) : (half + middleOffset)
+          let right = orig_caption.slice(split)
+          item.textContent = left + "..." + right
+          middleOffset++
+      }
   });
+
 }
 
 //default selection
