@@ -59,6 +59,7 @@ const createListItem = (data, idx) => {
   //image title
   let titleElement = document.createElement("p")
   titleElement.classList.add("listTitle")
+  titleElement.setAttribute("data", title)
   titleElement.innerHTML = title
 
   listItem.appendChild(imgElement)
