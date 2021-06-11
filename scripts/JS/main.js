@@ -87,5 +87,29 @@ data.forEach( (item, idx) => {
     mainListView.appendChild(createListItem(item, idx))
 })
 
+const checkWidth = () => {
+  document.querySelectorAll(".listTitle").forEach((item) => {
+      const orig_caption = item.getAttribute("data")
+      const orig_length = orig_caption.length
+      let middleOffset = 1
+      if (item.clientWidth >= item.scrollWidth) {
+        item.innerHTML = orig_caption
+      } else {
+        while (item.clientWidth < item.scrollWidth) {
+            let half = Math.round(orig_length/2)
+            let split = (half < middleOffset)? 1 : half - middleOffset
+            let left = orig_caption.slice(0,split)
+
+            split = (half + middleOffset > orig_length)? (orig_length - 1) : (half + middleOffset)
+            let right = orig_caption.slice(split)
+            item.innerHTML = left + "..." + right
+            middleOffset++
+        }
+    }
+  });
+}
+
 //default selection
 itemSelected(0)
+checkWidth()
+window.addEventListener("resize", checkWidth)
