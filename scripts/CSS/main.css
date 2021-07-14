@@ -26,11 +26,11 @@ body {
     width: 100%;
   }
   .mainListView {
-    width: 100%;
+    width: 90%;
     display: block;
   }
   .mainPreview {
-    width: 100%;
+    width: 95%;
     display: block;
   }
 }

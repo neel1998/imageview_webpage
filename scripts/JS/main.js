@@ -94,12 +94,11 @@ const checkWidth = () => {
       const orig_length = orig_caption.length
       item.textContent = orig_caption
       if (item.clientWidth < item.scrollWidth) {
-        let singleCharWidth = Math.floor(item.scrollWidth/orig_length) // finding the width of a single character in px
-        let possibleChars = Math.floor(item.clientWidth/singleCharWidth) // finding the posssible number of characters that can fit in given space
+        let possibleChars = Math.round((item.clientWidth*orig_length)/item.scrollWidth) // finding the posssible number of characters that can fit in given space
 
         possibleChars -= 3 // becasue we will be adding ... ellipsis characters
-        let left = orig_caption.slice(0, possibleChars/2)
-        let right = orig_caption.slice(orig_length - possibleChars/2)
+        let left = orig_caption.slice(0, Math.round(possibleChars/2))
+        let right = orig_caption.slice(orig_length - Math.round(possibleChars/2))
         item.textContent = left + "..." + right
       }
   });
