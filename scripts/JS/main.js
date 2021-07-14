@@ -90,7 +90,7 @@ data.forEach( (item, idx) => {
 
 const checkWidth = () => {
   document.querySelectorAll(".listTitle").forEach((item) => {
-      const orig_caption = item.getAttribute("data")
+      /*const orig_caption = item.getAttribute("data")
       const orig_length = orig_caption.length
       item.textContent = orig_caption
       if (item.clientWidth < item.scrollWidth) {
@@ -100,7 +100,25 @@ const checkWidth = () => {
         let left = orig_caption.slice(0, Math.round(possibleChars/2))
         let right = orig_caption.slice(orig_length - Math.round(possibleChars/2))
         item.textContent = left + "..." + right
+      }*/
+
+      //binary search
+      let min_length = 1
+      let orig_caption = item.getAttribute("data")
+      max_length = orig_caption.length;
+      while (min_length < max_length) {
+        mid_length = (max_length -  min_length)/2 + min_length;
+        let half_length = mid_length / 2
+        item.textContent = orig_caption.substr(0, half_length) + "..." + orig_caption.substr(-half_length);
+        if (item.scrollWidth > item.clientWidth) {
+          max_length = mid_length - 1;
+          item.textContent = orig_caption;
+        } else {
+          min_length = mid_length;
+          item.textContent = orig_caption;
+        }
       }
+      item.textContent = orig_caption.substr(0, max_length / 2) + "..." + orig_caption.substr(-max_length / 2);
   });
 }
 
