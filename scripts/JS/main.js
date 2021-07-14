@@ -103,22 +103,30 @@ const checkWidth = () => {
       }*/
 
       //binary search
+
       let min_length = 1
       let orig_caption = item.getAttribute("data")
-      max_length = orig_caption.length;
-      while (min_length < max_length) {
-        mid_length = (max_length -  min_length)/2 + min_length;
-        let half_length = mid_length / 2
-        item.textContent = orig_caption.substr(0, half_length) + "..." + orig_caption.substr(-half_length);
-        if (item.scrollWidth > item.clientWidth) {
-          max_length = mid_length - 1;
-          item.textContent = orig_caption;
-        } else {
-          min_length = mid_length;
-          item.textContent = orig_caption;
+      let max_length = orig_caption.length;
+      item.textContent = orig_caption;
+
+      if (item.scrollWidth > item.clientWidth) {
+        var mid_length;
+        var half_length;
+        while (min_length < max_length) {
+          mid_length = (max_length -  min_length)/2 + min_length;
+          half_length = mid_length / 2
+          item.textContent = orig_caption.substr(0, half_length) + "..." + orig_caption.substr(-half_length);
+          if (item.scrollWidth > item.clientWidth) {
+            max_length = mid_length - 1;
+            item.textContent = orig_caption;
+          } else {
+            min_length = mid_length + 1;
+            item.textContent = orig_caption;
+          }
         }
+        item.textContent = orig_caption.substr(0, mid_length / 2 - 1) + "..." + orig_caption.substr(-mid_length / 2);
       }
-      item.textContent = orig_caption.substr(0, max_length / 2) + "..." + orig_caption.substr(-max_length / 2);
+      
   });
 }
 
